@@ -1,0 +1,22 @@
+apiVersion: v1  # service comes under v1 apiVersion
+kind: Service 
+metadata:
+  name: name-of-the-service #ex: svc-nginx
+  namespace: default # namespace: should be matches with deployment's namespace
+spec:
+  ports:
+    - port: 80 #port which user try to hit like http
+      name: http
+      protocol: "TCP"
+      targetPort: 8080 #your containerport of the deployment 
+    - port: 443 #user routes the traffic to https port
+      name: https
+      protocol: "TCP"
+      targetPort: 8080
+  selector: 
+    app: web # existing service matches with the deployment that you want to deploy
+  type: LoadBalancer # if you set to "LoadBalancer", kubernetes will generate a loadbalancer 
+                     # you can access your application with load balancer
+                     
+  
+
