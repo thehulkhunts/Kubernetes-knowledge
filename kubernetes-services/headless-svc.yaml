@@ -1,0 +1,22 @@
+apiVersion: v1  # service comes under v1 apiVersion
+kind: Service 
+metadata:
+  name: name-of-the-service #ex: svc-nginx
+  namespace: default # namespace: should be matches with deployment's namespace
+spec:
+  ports:
+    - port: 80 #port which user try to hit like http
+      name: http
+      protocol: "TCP"
+      targetPort: 8080 #your containerport of the deployment 
+    - port: 443 #user routes the traffic to https port
+      name: https
+      protocol: "TCP"
+      targetPort: 8080
+  selector: 
+    app: web 
+  clusterIP: None  # if you set custerIP: None you are using a headless service
+                   # headless service is a type of service which you dont want to provision externallly
+                   
+  
+

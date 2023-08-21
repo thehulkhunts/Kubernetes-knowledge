@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1  # Ingress will comes in networking part of k8s apiVersion
+kind: Ingress
+metadata:
+  name: ingress-app
+annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:                                 #in the spec part you will write rules followed by host,traffic(http)paths,path
+  - host: foo.bar.com                    # followed by backend: includes services(1,2,3,...)
+    http:
+      paths:
+      - path: /foo
+        pathType: prefix 
+        backend:
+          service:
+            name: service-1
+            port:
+              number: 8080
+      - path: /bar
+        pathType: prefix
+        backend:
+          service:
+            name: service-2
+            port:
+              number: 8081
+
+              # Ingress controller lies k8s cluster will automatically creates the Load-balancer talking to cloud controller-manager
+              
