@@ -1,0 +1,39 @@
+# pod Affinity 
+# Pod affinity can tell the scheduler to locate a new pod on the same node as other pods 
+# if the label selector on the new pod matches the label on the current pod.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-affinity
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-store
+  template:
+    metadata:
+      labels:
+        app: web-store
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In   # this affinity follows if the pod with label app=web place this new pod onto that node
+                values:
+                - web 
+              topologyKey: "kubernetes.io/hostname"
+      contaianers:
+      - name: web-server
+        image: nginx
+        ports:
+          - containerPort: 80
+            name: http
+            protocol: "TCP"
+          
+
+

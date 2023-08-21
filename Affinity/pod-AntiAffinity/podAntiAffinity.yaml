@@ -1,0 +1,84 @@
+# Pod anti-affinity can prevent the scheduler from locating a new pod on the same node as pods with the same labels 
+ # if the label selector on the new pod matches the label on the current pod
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hard-anti-affinity
+  namespace: default
+spec:
+  replicas: 2
+  selctor:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels: 
+        app: web
+    spec:
+      affinity: 
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchEpressions:
+              - key: app
+                operator: In
+                values:
+                - store
+              topologyKey: "kubernetes.io/hostname"
+      contaianers:
+      - name: web-server
+        image: nginx
+        ports:
+          - containerPort: 80
+            name: web-server
+            protocol: "TCP"
+
+
+# In spec: affinity part we got the "requiredDuringSchedulingIgnoredDuringExecution part it states that 
+# it requires only at the time scheduling the pods to the nodes, ignore at the time of execution
+# the above method is hard one, like if the rule matches it only assign the pod to the nodes or else it goes into peding state.
+#
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: soft-anti-affinity
+  namespace: default
+spec:
+  replicas: 2
+  selector: 
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web 
+    spec:
+      affinity: 
+        podAntiAffinity:
+          prefferedDUringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            prefered: 
+            - labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - web 
+                topologyKey: "kubernetes.io/hostname"
+      contaianers:
+      - name: web-server
+        image: nginx
+        ports:
+          - containerPort: 80
+            name: http
+            protocol: "TCP"
+
+# preffered one considered as a soft one because it will find a matche of rule, if doesnot find any, 
+# it will schedules to any nodes
+
+
+
+
