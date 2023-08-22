@@ -1,0 +1,12 @@
+# Adding cpu and memory limits to namespace 
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: adding-ns-quota
+  namespace: default
+spec:
+  hard:
+    limits.cpu: 2
+    limits.memory: "2Gi"
+    requests.cpu: 1
+    requests.memory: "1Gi"
