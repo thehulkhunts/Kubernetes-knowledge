@@ -1,7 +1,7 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: rq-01
+  name: rq-pod-01
   namespace: default
 spec:
   containers:
