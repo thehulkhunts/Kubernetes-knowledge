@@ -17,5 +17,5 @@ spec:
 
         # congiure limit but not request let see what happen to request?
         # it will also take request as "1Gi"
-        
+
   

@@ -1,0 +1,21 @@
+# What if you specify a container's limit, but not its request?
+# The output shows that the container's memory request is set to the value specified in the container's manifest. The container is limited to use no more than 512MiB of memory, which matches the default memory limit for the namespace.
+# resources:
+#  limits:
+ #   memory: 512Mi
+ # requests:
+  #  memory: 128Mi  
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: default-mem-demo-3
+spec:
+  containers:
+  - name: default-mem-demo-3-ctr
+    image: nginx
+    resources:
+      requests:
+        memory: "128Mi" 
+
+        #####
