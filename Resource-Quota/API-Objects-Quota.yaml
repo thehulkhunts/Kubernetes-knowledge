@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: API-Quota
+  namespace: dev
+spec:
+  hard:
+    persistentvolumeclaims: "2" 
+    services.loadbalancers: "3"
+    services.nodeports: "1" 
+    secrets: "5"
+    configmaps: "5" 
+
+    
