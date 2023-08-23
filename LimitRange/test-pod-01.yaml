@@ -13,3 +13,4 @@ spec:
 ## If you set default LimitRange to Pod  automatically it will take the default resources to the pod
 
 ## when you describe or edit the pod you will get to see the limit range to the pod
+###
