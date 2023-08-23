@@ -1,0 +1,21 @@
+# What if you specify a container's limit, but not its request?
+# when you specify limit to the container but not request, it will default limit range to the request.
+# let say limit range is memory: "1Gi" request also "1Gi"
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configuring-limit-but-not-request
+  namespace: default
+spec:
+  containers:
+  - name: limit
+    image: ubuntu
+    resources:
+      limits:
+        memory: "1Gi" 
+
+        # congiure limit but not request let see what happen to request?
+        # it will also take request as "1Gi"
+
+  # error:message:  Back-off restarting failed container limit in pod configuring-limit-but-not-request_default(794a8ae6-2ae9-4e73-b0e3-cbfdf4111b52)
