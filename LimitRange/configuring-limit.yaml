@@ -18,4 +18,4 @@ spec:
         # congiure limit but not request let see what happen to request?
         # it will also take request as "1Gi"
 
-  
+  # error:message:  Back-off restarting failed container limit in pod configuring-limit-but-not-request_default(794a8ae6-2ae9-4e73-b0e3-cbfdf4111b52)
