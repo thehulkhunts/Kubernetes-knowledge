@@ -9,6 +9,13 @@ spec:
     image: nginx
     ports:
       - containerPort: 80
+    resources:
+      limits:
+        cpu: 1
+        memory: "512Mi"
+      requests:
+        cpu: "500m"
+        memory: "250Mi"
 
 ## If you set default LimitRange to Pod  automatically it will take the default resources to the pod
 
