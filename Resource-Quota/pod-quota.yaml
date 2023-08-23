@@ -5,4 +5,4 @@ metadata:
   namespace: dev
 spec:
   hard:
-    pod: "5"
+    pods: "5"
