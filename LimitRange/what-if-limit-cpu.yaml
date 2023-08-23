@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configuring-limit-but-not-request
+  namespace: default
+spec:
+  containers:
+  - name: limit
+    image: ubuntu
+    resources:
+      limits:
+        cpu: 1
