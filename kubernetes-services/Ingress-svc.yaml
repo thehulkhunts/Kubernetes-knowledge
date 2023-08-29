@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1  # Ingress will comes in networking part of k8s
 kind: Ingress
 metadata:
   name: ingress-app
-annotations:
+  annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:                                 #in the spec part you will write rules followed by host,traffic(http)paths,path
