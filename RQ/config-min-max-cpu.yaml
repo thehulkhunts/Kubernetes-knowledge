@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: min-maxx-cpu
+  namespace: app-01
+spec:
+  limits:
+  - max:
+      cpu: "1m"
+    min:
+      cpu: "0.5m"
+    type: Container
+
+
+
